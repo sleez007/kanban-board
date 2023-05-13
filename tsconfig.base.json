@@ -15,10 +15,17 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@kanbanboard/shared/assets": ["libs/shared/assets/src/index.ts"],
+      "@kanbanboard/shared/board/data-access": [
+        "libs/shared/board/data-access/src/index.ts"
+      ],
       "@kanbanboard/shared/ui-material": [
         "libs/shared/ui-material/src/index.ts"
       ],
-      "@kanbanboard/shared/ui-styles": ["libs/shared/ui-styles/src/index.ts"]
+      "@kanbanboard/shared/ui-styles": ["libs/shared/ui-styles/src/index.ts"],
+      "@kanbanboard/shared/validation-util": [
+        "libs/shared/validation-util/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

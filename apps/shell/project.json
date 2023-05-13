@@ -15,8 +15,19 @@
         "main": "apps/shell/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/shell/tsconfig.app.json",
-        "assets": ["apps/shell/src/favicon.ico", "apps/shell/src/assets"],
-        "styles": ["apps/shell/src/styles.scss"],
+        "assets": [
+          "apps/shell/src/favicon.ico",
+          "apps/shell/src/assets",
+          {
+            "input": "libs/shared/assets/src/lib",
+            "glob": "**/*",
+            "output": "assets"
+          }
+        ],
+        "styles": [
+          "libs/shared/ui-styles/src/lib/scss/main.scss",
+          "apps/shell/src/styles.scss"
+        ],
         "scripts": [],
         "customWebpackConfig": {
           "path": "apps/shell/webpack.config.js"

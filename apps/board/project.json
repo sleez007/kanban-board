@@ -15,7 +15,15 @@
         "main": "apps/board/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/board/tsconfig.app.json",
-        "assets": ["apps/board/src/favicon.ico", "apps/board/src/assets"],
+        "assets": [
+          "apps/board/src/favicon.ico",
+          "apps/board/src/assets",
+          {
+            "input": "libs/shared/assets/src/lib",
+            "glob": "**/*",
+            "output": "assets"
+          }
+        ],
         "styles": ["apps/board/src/styles.scss"],
         "scripts": [],
         "customWebpackConfig": {
