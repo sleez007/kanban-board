@@ -1,0 +1,25 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@kanbanboard/shared/ui-material": [
+        "libs/shared/ui-material/src/index.ts"
+      ],
+      "@kanbanboard/shared/ui-styles": ["libs/shared/ui-styles/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
