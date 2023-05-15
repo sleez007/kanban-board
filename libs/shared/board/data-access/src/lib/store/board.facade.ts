@@ -1,5 +1,6 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { boardActions } from './board.actions';
 
 import * as BoardActions from './board.actions';
 //import * as BoardFeature from './board.reducer';
@@ -7,7 +8,8 @@ import * as BoardSelectors from './board.selectors';
 
 @Injectable()
 export class BoardFacade {
-  private readonly store = inject(Store);
+  constructor(private readonly store: Store) {}
+  // private readonly store = inject(Store);
 
   /**
    * Combine pieces of state using createSelector,
@@ -18,9 +20,14 @@ export class BoardFacade {
   selectedBoard$ = this.store.pipe(select(BoardSelectors.selectEntity));
 
   /**
-   * Use the initialization action to perform one
-   * or more tasks in your Effects.
+   * Use this action to retrieve the initial effect list
    */
+  loadInitialBoards() {
+    console.log('called me');
+    this.store.dispatch(boardActions.getinitialdata());
+  }
+
+  // to be removed later
   init() {
     this.store.dispatch(BoardActions.initBoard());
   }

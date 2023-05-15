@@ -1,0 +1,8 @@
+<ng-template #toolbarRef>
+  <kanbanboard-toolbar />
+</ng-template>
+<ng-template #sidenavRef>
+  <kanbanboard-sidenav />
+</ng-template>
+
+<kanbanboard-layout [sidenavRef]="sidenavRef" [toolbarRef]="toolbarRef" />

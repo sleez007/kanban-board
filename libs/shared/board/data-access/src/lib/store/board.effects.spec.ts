@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import * as BoardActions from './board.actions';
 import { BoardEffects } from './board.effects';
+import { BoardService } from '../services/board.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('BoardEffects', () => {
   let actions: Observable<Action>;
@@ -14,8 +16,9 @@ describe('BoardEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [],
+      imports: [HttpClientModule],
       providers: [
+        BoardService,
         BoardEffects,
         provideMockActions(() => actions),
         provideMockStore(),

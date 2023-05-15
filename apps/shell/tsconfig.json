@@ -11,6 +11,7 @@
   },
   "files": [],
   "include": [],
+  "exclude": ["src/@kanban"],
   "references": [
     {
       "path": "./tsconfig.app.json"

@@ -14,6 +14,10 @@ import {
   //initialBoardState,
   boardReducer,
 } from './board.reducer';
+import { firstValueFrom } from 'rxjs';
+import { BoardService } from '../services/board.service';
+import { HttpClientModule } from '@angular/common/http';
+// import { NetworkHelperService } from '../data/network-helper.service';
 // import * as BoardSelectors from './board.selectors';
 
 interface TestSchema {
@@ -32,10 +36,11 @@ describe('BoardFacade', () => {
     beforeEach(() => {
       @NgModule({
         imports: [
+          HttpClientModule,
           StoreModule.forFeature(BOARD_FEATURE_KEY, boardReducer),
           EffectsModule.forFeature([BoardEffects]),
         ],
-        providers: [BoardFacade],
+        providers: [BoardFacade, BoardService],
       })
       class CustomFeatureModule {}
 
@@ -76,8 +81,8 @@ describe('BoardFacade', () => {
      * Use `loadBoardSuccess` to manually update list
      */
     it('allBoard$ should return the loaded list; and loaded flag == true', async () => {
-      let list = await readFirst(facade.allBoard$);
-      let isLoaded = await readFirst(facade.loaded$);
+      let list = await firstValueFrom(facade.allBoard$);
+      let isLoaded = await firstValueFrom(facade.loaded$);
 
       expect(list.length).toBe(0);
       expect(isLoaded).toBe(false);

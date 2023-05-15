@@ -1,0 +1,19 @@
+@mixin lightTheme {
+  --clr-bg: hsl(222, 74%, 94%);
+  --clr-primary-400: hsl(242, 48%, 58%);
+  --clr-surface-bg: hsl(0, 0%, 100%);
+  --clr-surface-bg-trans: hsla(0, 0%, 100%, 0.4);
+  --clr-toggle-bg-trans: hsla(242, 48%, 58%, 0.6);
+  --clr-text-primary: hsl(237, 100%, 4%);
+  --clr-text-accent: hsl(215, 16%, 57%);
+}
+
+@mixin darkTheme {
+  --clr-bg: hsl(235, 16%, 15%);
+  --clr-primary-400: hsl(242, 48%, 58%);
+  --clr-surface-bg: hsl(235, 12%, 19%);
+  --clr-surface-bg-trans: hsla(235, 12%, 19%, 0.4);
+  --clr-toggle-bg-trans: hsla(242, 48%, 58%, 0.6);
+  --clr-text-primary: hsl(0, 0%, 100%);
+  --clr-text-accent: hsl(215, 16%, 57%);
+}
