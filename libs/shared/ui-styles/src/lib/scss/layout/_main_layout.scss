@@ -1,0 +1,36 @@
+.wrapper {
+  --transition: 200ms all ease-in;
+  $width: 302px;
+  height: calc(100vh - 90px);
+  @apply relative overflow-hidden;
+  .sidebar {
+    @apply fixed left-0 bottom-0 w-[302px] bg-[var(--clr-surface-bg)];
+    height: calc(100vh - 90px);
+    transition: var(--transition);
+  }
+
+  &__main-area {
+    @apply relative left-[304px] p-4 overflow-auto;
+    width: calc(100% - 302px);
+    transition: var(--transition);
+  }
+  .kit {
+    transition: var(--transition);
+  }
+}
+
+body.full {
+  .sidebar {
+    @apply left-[-302px];
+  }
+  .wrapper__main-area {
+    @apply left-0 w-full;
+  }
+
+  .kit.full {
+    @apply left-[-200px] flex justify-end bg-[var(--clr-primary-400)];
+    span {
+      @apply hidden;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
-import { RemoteEntryComponent } from './entry.component';
+import { BoardShellComponent } from './board/board-shell/board-shell.component';
 
 export const remoteRoutes: Route[] = [
-  { path: '', component: RemoteEntryComponent },
+  { path: '', component: BoardShellComponent },
 ];

@@ -1,0 +1,26 @@
+<div class="column">
+  <div>
+    <h3 class="flex gap-2 items-center">
+      <span
+        class="h-[10px] w-[10px] rounded-full"
+        [style.backgroundColor]="color"
+      ></span
+      >{{ column.name }} ( {{ column.tasks.length }} )
+    </h3>
+    <div
+      class="dropbox"
+      cdkDropList
+      [id]="columnIndex.toString()"
+      [cdkDropListData]="column.tasks"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div
+        cdkDrag
+        [cdkDragData]="task"
+        *ngFor="let task of column.tasks; trackBy: identity; let i = index"
+      >
+        <kanbanboard-task [task]="task" [taskIndex]="i" />
+      </div>
+    </div>
+  </div>
+</div>

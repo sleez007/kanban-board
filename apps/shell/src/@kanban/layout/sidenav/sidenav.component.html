@@ -1,1 +1,30 @@
-<p>sidenav works!</p>
+<div
+  class="sidebar"
+  *ngIf="{
+    total: totalBoards$ | async,
+    boards: boardsMini$ | async,
+    selectedBoardId: selectedBoardId$ | async
+  } as obs"
+>
+  <div>
+    <p class="text-clr-accent text-sm pl-5">All boards ({{ obs.total }})</p>
+    <ul class="pt-3">
+      <li
+        class="pl-5 side-item flex items-center gap-2 cursor-pointer"
+        (click)="selectedBoardById(board.id)"
+        [ngClass]="{ active: board.id === obs.selectedBoardId }"
+        *ngFor="let board of obs.boards"
+      >
+        <mat-icon>auto_awesome_mosaic</mat-icon> {{ board.name }}
+      </li>
+      <li
+        class="pl-5 flex side-item text-[--clr-primary-400] items-center gap-2 cursor-pointer"
+      >
+        <mat-icon>add</mat-icon>Create New Board
+      </li>
+    </ul>
+  </div>
+  <div class="theme_switch">
+    <!-- Add the theme switch later here -->
+  </div>
+</div>

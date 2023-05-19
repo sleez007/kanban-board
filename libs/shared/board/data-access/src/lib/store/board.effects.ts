@@ -16,12 +16,12 @@ export class BoardEffects {
 
   getInitialData$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(boardActions.getinitialdata),
+      ofType(boardActions.getInitialData),
       switchMap(() =>
         this.boardService.getBoards().pipe(
-          map((data) => boardApiActions.getinitialdatasuccess({ data })),
+          map((data) => boardApiActions.getInitialDataSuccess({ data })),
           catchError((error) =>
-            of(boardApiActions.getinitialdatafailure({ error }))
+            of(boardApiActions.getInitialDataFailure({ error }))
           )
         )
       )

@@ -7,6 +7,7 @@ import {
 } from '@angular/common/http/testing';
 import { firstValueFrom, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { IBoard } from '../model';
 
 describe('BoardService', () => {
   let service: BoardService;
@@ -47,5 +48,14 @@ describe('BoardService', () => {
     const data = service.getBoards();
     const json = await firstValueFrom(data);
     expect(json.length).toBe(3);
+  });
+
+  it('ensure getBoard returns an observable', async () => {
+    const boards: IBoard[] = [{ name: 'jkbkjb', id: 2, columns: [] }];
+
+    jest.spyOn(service, 'getBoards').mockReturnValue(of(boards));
+    const data = service.getBoards();
+    const json = await firstValueFrom(data);
+    expect(json.length).toBe(1);
   });
 });

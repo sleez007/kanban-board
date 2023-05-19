@@ -1,0 +1,11 @@
+.task-card {
+  @apply p-3 mt-3 shadow rounded-lg transition cursor-grab bg-[--clr-surface-bg];
+
+  &:hover {
+    transform: scale(0.97);
+  }
+
+  h3 {
+    @apply font-semibold mb-2 text-base;
+  }
+}

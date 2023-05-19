@@ -2,23 +2,15 @@ import { NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule, Store } from '@ngrx/store';
-import { readFirst } from '@nx/angular/testing';
 
 import * as BoardActions from './board.actions';
 import { BoardEffects } from './board.effects';
 import { BoardFacade } from './board.facade';
 import { BoardEntity } from './board.models';
-import {
-  BOARD_FEATURE_KEY,
-  BoardState,
-  //initialBoardState,
-  boardReducer,
-} from './board.reducer';
+import { BOARD_FEATURE_KEY, BoardState, boardReducer } from './board.reducer';
 import { firstValueFrom } from 'rxjs';
 import { BoardService } from '../services/board.service';
 import { HttpClientModule } from '@angular/common/http';
-// import { NetworkHelperService } from '../data/network-helper.service';
-// import * as BoardSelectors from './board.selectors';
 
 interface TestSchema {
   board: BoardState;
@@ -62,16 +54,16 @@ describe('BoardFacade', () => {
      * The initially generated facade::loadAll() returns empty array
      */
     it('loadAll() should return empty list with loaded == true', async () => {
-      let list = await readFirst(facade.allBoard$);
-      let isLoaded = await readFirst(facade.loaded$);
+      let list = await firstValueFrom(facade.allBoard$);
+      let isLoaded = await firstValueFrom(facade.loaded$);
 
       expect(list.length).toBe(0);
       expect(isLoaded).toBe(false);
 
       facade.init();
 
-      list = await readFirst(facade.allBoard$);
-      isLoaded = await readFirst(facade.loaded$);
+      list = await firstValueFrom(facade.allBoard$);
+      isLoaded = await firstValueFrom(facade.loaded$);
 
       expect(list.length).toBe(0);
       expect(isLoaded).toBe(true);
@@ -93,8 +85,8 @@ describe('BoardFacade', () => {
         })
       );
 
-      list = await readFirst(facade.allBoard$);
-      isLoaded = await readFirst(facade.loaded$);
+      list = await firstValueFrom(facade.allBoard$);
+      isLoaded = await firstValueFrom(facade.loaded$);
 
       expect(list.length).toBe(2);
       expect(isLoaded).toBe(true);

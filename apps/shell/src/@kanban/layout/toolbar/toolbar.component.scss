@@ -1,0 +1,30 @@
+.cont {
+  height: 90px;
+
+  .navbar {
+    @apply flex items-center;
+
+    &__logo {
+      @apply w-[280px] relative h-full flex justify-center items-center;
+      &::after {
+        content: '';
+        background: var(--clr-bg);
+        height: 100%;
+        width: 2px;
+        @apply absolute right-0 top-0;
+      }
+    }
+
+    &__main {
+      @apply flex justify-between flex-1 items-center pl-4;
+      .cta {
+        @apply flex  items-center gap-2;
+
+        .btn {
+          border-radius: 30px;
+          @apply py-4;
+        }
+      }
+    }
+  }
+}

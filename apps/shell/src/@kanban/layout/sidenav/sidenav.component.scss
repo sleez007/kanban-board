@@ -1,0 +1,20 @@
+.sidebar {
+  @apply pt-4;
+  .side-item {
+    @apply w-11/12 pl-5 py-2 mb-1;
+    &:hover {
+      @apply bg-[--clr-primary-400];
+      border-top-right-radius: 3em;
+      border-bottom-right-radius: 3em;
+    }
+    &:last-child {
+      @apply bg-transparent;
+    }
+
+    &.active {
+      @apply bg-[--clr-primary-400];
+      border-top-right-radius: 3em;
+      border-bottom-right-radius: 3em;
+    }
+  }
+}

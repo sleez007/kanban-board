@@ -1,0 +1,9 @@
+.kit {
+  @apply w-[280px] z-10 fixed bottom-5 left-0 text-center p-3 gap-2 transition flex items-center justify-center;
+  border-top-right-radius: 3em;
+  border-bottom-right-radius: 3em;
+
+  &:hover {
+    @apply bg-[var(--clr-primary-400)];
+  }
+}

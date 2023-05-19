@@ -1,0 +1,5 @@
+@import '../abstract/mixin';
+
+body {
+  @include lightTheme;
+}

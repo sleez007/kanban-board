@@ -2,8 +2,9 @@
   <ng-container *ngTemplateOutlet="toolbarRef" />
   <div class="wrapper">
     <ng-container *ngTemplateOutlet="sidenavRef" />
-    <main>
+    <main class="wrapper__main-area">
       <router-outlet />
     </main>
   </div>
+  <kanbanboard-kit />
 </section>

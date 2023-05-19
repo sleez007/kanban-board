@@ -1,0 +1,4 @@
+@import '../abstract/mixin';
+body.dark {
+  @include darkTheme;
+}

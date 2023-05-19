@@ -19,13 +19,10 @@ module.exports = {
         5: '32px',
         6: '48px',
       },
-      padding: {},
-      margin: {},
       fontSize: {
         sm: '0.8rem',
         base: '1rem',
       },
-      colors: {},
       container: {
         center: true,
       },
