@@ -18,6 +18,7 @@
         <mat-icon>auto_awesome_mosaic</mat-icon> {{ board.name }}
       </li>
       <li
+        (click)="createBoard()"
         class="pl-5 flex side-item text-[--clr-primary-400] items-center gap-2 cursor-pointer"
       >
         <mat-icon>add</mat-icon>Create New Board

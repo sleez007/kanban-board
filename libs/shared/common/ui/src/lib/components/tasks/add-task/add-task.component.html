@@ -21,10 +21,11 @@
         <mat-label class="text-white">e.g Make Coffee</mat-label>
         <input matInput [formControl]="group.controls.title" />
       </mat-form-field>
-      <mat-icon *ngIf="i !== 0" (click)="removeSubTask(i)">add</mat-icon>
+      <mat-icon *ngIf="i !== 0" (click)="removeSubTask(i)">delete</mat-icon>
     </div>
     <button
       (click)="addNewSubTask()"
+      color="accent"
       class="btn mt-3"
       type="button"
       mat-flat-button
