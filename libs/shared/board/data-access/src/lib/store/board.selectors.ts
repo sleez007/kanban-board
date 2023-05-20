@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { BOARD_FEATURE_KEY, BoardState, boardAdapter } from './board.reducer';
-import { TBoardMini } from '../model';
+import { TColumnMini, TBoardMini } from '../model';
 
 // Lookup the 'Board' feature state managed by NgRx
 export const selectBoardState =
@@ -48,4 +48,15 @@ export const selectEntity = createSelector(
   selectBoardEntities,
   selectSelectedId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
+);
+
+export const selectMiniColumns = createSelector(
+  selectBoardEntities,
+  selectSelectedId,
+  (entities, selectedId) =>
+    <TColumnMini[]>(
+      (selectedId
+        ? entities[selectedId]?.columns.map(({ name }) => ({ name }))
+        : [])
+    )
 );

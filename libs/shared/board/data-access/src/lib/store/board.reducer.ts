@@ -80,6 +80,23 @@ const reducer = createReducer(
       );
     }
   ),
+  on(boardActions.addNewTask, (state, { task }) => {
+    const colName = task.status;
+    const board = structuredClone(state.entities[state.selectedId ?? -1]) as
+      | IBoard
+      | undefined;
+    if (!board) return { ...state };
+    const columnIndex = board.columns.findIndex((col) => col.name === colName);
+    if (columnIndex < 0)
+      throw new Error(
+        'This error should never happen in the real sense! but we just check for safety :) '
+      );
+    board.columns[columnIndex].tasks.push(task);
+    return boardAdapter.updateOne(
+      { id: state.selectedId ?? -1, changes: board },
+      { ...state }
+    );
+  }),
   on(BoardActions.initBoard, (state) => ({
     ...state,
     loaded: false,

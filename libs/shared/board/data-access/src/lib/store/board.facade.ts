@@ -22,6 +22,9 @@ export class BoardFacade {
   selectboardTotal$ = this.store.pipe(select(BoardSelectors.selectTotalBoards));
   selectedBoard$ = this.store.pipe(select(BoardSelectors.selectEntity));
   selectedBoardId$ = this.store.pipe(select(BoardSelectors.selectSelectedId));
+  selectMiniColumns$ = this.store.pipe(
+    select(BoardSelectors.selectMiniColumns)
+  );
 
   /**
    * Use this action to retrieve the initial effect list
@@ -33,6 +36,10 @@ export class BoardFacade {
 
   selectBoardById(id: number) {
     this.store.dispatch(boardActions.selectBoardById({ id }));
+  }
+
+  addTask(task: ITask) {
+    this.store.dispatch(boardActions.addNewTask({ task }));
   }
 
   dragTaskWithSameColumn(

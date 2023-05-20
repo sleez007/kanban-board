@@ -40,6 +40,7 @@ export const boardActions = createActionGroup({
     createNewBoard: props<{ data: IBoard }>(),
     addNewColumn: emptyProps(),
     deleteBoard: emptyProps(),
+    addNewTask: props<{ task: ITask }>(),
     markTaskAsDone: props<{ taskId: number; subTaskId: number }>(),
   },
 });

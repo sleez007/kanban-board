@@ -23,6 +23,7 @@
       "@kanbanboard/shared/common/data-access": [
         "libs/shared/common/data-access/src/index.ts"
       ],
+      "@kanbanboard/shared/common/ui": ["libs/shared/common/ui/src/index.ts"],
       "@kanbanboard/shared/ui-material": [
         "libs/shared/ui-material/src/index.ts"
       ],
