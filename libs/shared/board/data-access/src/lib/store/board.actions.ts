@@ -38,10 +38,18 @@ export const boardActions = createActionGroup({
       task: ITask;
     }>(),
     createNewBoard: props<{ data: IBoard }>(),
+    editBoard: props<{ data: IBoard }>(),
     addNewColumn: emptyProps(),
     deleteBoard: emptyProps(),
     addNewTask: props<{ task: ITask }>(),
+    editTask: props<{ columnIndex: number; taskIndex: number; task: ITask }>(),
+    deleteTask: props<{ columnIndex: number; taskIndex: number }>(),
     markTaskAsDone: props<{ taskId: number; subTaskId: number }>(),
+    toggleSubTaskStatus: props<{
+      subtaskIndex: number;
+      taskIndex: number;
+      columnIndex: number;
+    }>(),
   },
 });
 

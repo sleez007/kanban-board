@@ -6,6 +6,8 @@ import {
 } from '@kanbanboard/shared/board/data-access';
 import { UtilWare } from '../../../util/Util';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material/dialog';
+import { EditTaskComponent } from '@kanbanboard/shared/common/ui';
 
 @Component({
   selector: 'kanbanboard-board-column',
@@ -17,10 +19,12 @@ export class BoardColumnComponent {
   @Input({ required: true }) columnIndex!: number;
   color: string = UtilWare.generateRandomHexColorValue();
 
-  constructor(private readonly boardFacade: BoardFacade) {}
+  constructor(
+    private readonly boardFacade: BoardFacade,
+    public readonly dialog: MatDialog
+  ) {}
 
   drop(event: CdkDragDrop<ITask[]>) {
-    console.log(event.previousContainer.id, '---', event.container.id);
     if (event.previousContainer === event.container) {
       this.boardFacade.dragTaskWithSameColumn(
         parseInt(event.previousContainer.id),
@@ -37,6 +41,14 @@ export class BoardColumnComponent {
         event.previousContainer.data[event.previousIndex]
       );
     }
+  }
+
+  openTask(taskIndex: number) {
+    this.dialog.open(EditTaskComponent, {
+      maxHeight: '70vh',
+      width: '600px',
+      data: { taskIndex, columnIndex: this.columnIndex },
+    });
   }
 
   identity(index: number, item: ITask) {

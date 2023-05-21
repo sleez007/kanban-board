@@ -1,1 +1,51 @@
-<p>edit-task works!</p>
+<div
+  *ngIf="{ task: taskInfo$ | async, columns: columns$ | async } as obs"
+  class="add-task-modal p-4 h-full w-full bg-[--clr-surface-bg]"
+>
+  <div class="flex justify-between items-center gap-3 w-full">
+    <h2 mat-dialog-title class="ml-[-20px] mb-3 flex-1">
+      {{ obs.task?.title }}
+    </h2>
+    <button
+      mat-icon-button
+      aria-label="More options Button"
+      [matMenuTriggerFor]="menu"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+  <p class="mb-3">{{ obs.task?.description }}</p>
+  <h4 class="mb-3" *ngIf="obs.task">{{ obs.task | taskSummary }}</h4>
+  <ul>
+    <li
+      class="mb-1 line-through flex gap-2"
+      *ngFor="let sub of obs.task?.subtasks; let i = index"
+    >
+      <mat-checkbox
+        class="gap-2"
+        (change)="toggleSubtaskStatus(i)"
+        [checked]="sub.isCompleted"
+        ><span [ngClass]="{ 'line-through': sub.isCompleted }">{{
+          sub.title
+        }}</span></mat-checkbox
+      >
+    </li>
+  </ul>
+  <mat-form-field *ngIf="obs.task" class="w-full mt-6">
+    <mat-label>Select Column</mat-label>
+    <mat-select [value]="obs.task.status">
+      <mat-option
+        *ngFor="let col of obs.columns; let i = index"
+        (click)="moveTaskToNewColumn(i, obs.task)"
+        [value]="col.name"
+      >
+        {{ col.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="deleteTask()">Delete Task</button>
+  <button mat-menu-item (click)="editTask()">Edit Task</button>
+</mat-menu>

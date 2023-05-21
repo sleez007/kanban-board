@@ -15,6 +15,7 @@
       (cdkDropListDropped)="drop($event)"
     >
       <div
+        (click)="openTask(i)"
         cdkDrag
         [cdkDragData]="task"
         *ngFor="let task of column.tasks; trackBy: identity; let i = index"

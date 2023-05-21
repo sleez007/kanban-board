@@ -1,5 +1,5 @@
 .column {
-  width: 270px;
+  @apply w-[270px] h-full;
 
   .dropbox {
     min-height: 300px;

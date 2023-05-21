@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BoardFacade } from '@kanbanboard/shared/board/data-access';
-import { AddTaskComponent } from '@kanbanboard/shared/common/ui';
+import {
+  AddEditBoardComponent,
+  AddTaskComponent,
+} from '@kanbanboard/shared/common/ui';
 import { combineLatestWith, map } from 'rxjs';
 
 @Component({
@@ -20,6 +23,22 @@ export class ToolbarComponent {
     public readonly dialog: MatDialog
   ) {}
   createNewTask() {
-    this.dialog.open(AddTaskComponent, { height: '70vh', width: '600px' });
+    this.dialog.open(AddTaskComponent, {
+      maxHeight: '70vh',
+      width: '600px',
+      data: { isEdit: false },
+    });
+  }
+
+  editBoard() {
+    this.dialog.open(AddEditBoardComponent, {
+      width: '600px',
+      maxHeight: '70vh',
+      data: { isEdit: true },
+    });
+  }
+
+  deleteBoard() {
+    this.boardFacade.deleteBoard();
   }
 }

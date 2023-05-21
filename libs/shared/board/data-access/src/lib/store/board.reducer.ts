@@ -4,12 +4,11 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { boardActions, boardApiActions } from './board.actions';
 
 import * as BoardActions from './board.actions';
-import { IBoard, ITask } from '../model';
+import { IBoard, ISubtask, ITask } from '../model';
 
 export const BOARD_FEATURE_KEY = 'board';
 
 export interface BoardState extends EntityState<IBoard> {
-  // boards: IBoard[]
   selectedId?: number; // which Board record has been selected
   loaded: boolean; // has the Board list been loaded
   error?: string | null; // last known error (if any)
@@ -47,6 +46,82 @@ const reducer = createReducer(
     loaded: true,
     error,
   })),
+  on(boardActions.createNewBoard, (state, { data }) => {
+    return boardAdapter.addOne(data, { ...state });
+  }),
+  on(
+    boardActions.toggleSubTaskStatus,
+    (state, { subtaskIndex, taskIndex, columnIndex }) => {
+      const board = structuredClone(state.entities[state.selectedId ?? -1]) as
+        | IBoard
+        | undefined;
+      if (!board) return { ...state };
+      const subTask: ISubtask = {
+        ...board.columns[columnIndex].tasks[taskIndex].subtasks[subtaskIndex],
+        isCompleted:
+          !board.columns[columnIndex].tasks[taskIndex].subtasks[subtaskIndex]
+            .isCompleted,
+      };
+      board.columns[columnIndex].tasks[taskIndex].subtasks[subtaskIndex] =
+        subTask;
+      return boardAdapter.updateOne(
+        { id: state.selectedId ?? -1, changes: board },
+        { ...state }
+      );
+    }
+  ),
+  on(boardActions.deleteTask, (state, { taskIndex, columnIndex }) => {
+    const board = structuredClone(state.entities[state.selectedId ?? -1]) as
+      | IBoard
+      | undefined;
+    if (!board) return { ...state };
+
+    board.columns[columnIndex].tasks.splice(taskIndex, 1);
+    return boardAdapter.updateOne(
+      { id: state.selectedId ?? -1, changes: board },
+      { ...state }
+    );
+  }),
+  on(boardActions.editTask, (state, { columnIndex, taskIndex, task }) => {
+    const board = structuredClone(state.entities[state.selectedId ?? -1]) as
+      | IBoard
+      | undefined;
+    if (!board) return { ...state };
+    const newColumnIndex = board.columns.findIndex(
+      (col) => col.name === task.status
+    );
+    if (newColumnIndex < 0)
+      throw new Error(
+        'This error should never happen in the real sense! but we just check for safety :) '
+      );
+    if (newColumnIndex === columnIndex) {
+      board.columns[newColumnIndex].tasks[taskIndex] = task;
+    } else {
+      removeDataFromPosition(task, taskIndex, board.columns[columnIndex].tasks);
+      board.columns[newColumnIndex].tasks.push(task);
+    }
+    return boardAdapter.updateOne(
+      { id: state.selectedId ?? -1, changes: board },
+      { ...state }
+    );
+  }),
+
+  on(boardActions.editBoard, (state, { data }) => {
+    return boardAdapter.updateOne(
+      { id: state.selectedId ?? -1, changes: data },
+      { ...state }
+    );
+  }),
+  on(boardActions.deleteBoard, (state) => {
+    let id = state.ids.length > 0 ? parseInt(`${state.ids[0]}`) : undefined;
+    if (id === state.selectedId && state.ids.length > 1)
+      id = parseInt(`${state.ids[1]}`);
+
+    return boardAdapter.removeOne(state.selectedId ?? -1, {
+      ...state,
+      selectedId: id,
+    });
+  }),
   on(
     boardActions.dragTaskWithSameColumn,
     (state, { containerId, prevIndex, currentIndex, task }) => {
@@ -73,7 +148,11 @@ const reducer = createReducer(
       const fromColumn = board.columns[fromColumnId];
       const toColumn = board.columns[toColumnId];
       removeDataFromPosition(task, prevIndex, fromColumn.tasks);
-      moveDataToPosition(task, currentIndex, toColumn.tasks);
+      moveDataToPosition(
+        { ...task, status: toColumn.name },
+        currentIndex,
+        toColumn.tasks
+      );
       return boardAdapter.updateOne(
         { id: state.selectedId ?? -1, changes: board },
         { ...state }

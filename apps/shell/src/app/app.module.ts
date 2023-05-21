@@ -17,10 +17,7 @@ import { environment } from '@env/global';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes, {
-      initialNavigation: 'enabledBlocking',
-      useHash: true,
-    }),
+    RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     BrowserAnimationsModule,
     MainLayoutModule,
     SharedBoardDataAccessModule,

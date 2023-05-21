@@ -10,8 +10,9 @@
   }
 
   &__main-area {
-    @apply relative left-[304px] p-4 overflow-auto;
+    @apply relative left-[304px] p-4 pb-12 overflow-auto;
     width: calc(100% - 302px);
+    height: calc(100vh - 90px);
     transition: var(--transition);
   }
   .kit {

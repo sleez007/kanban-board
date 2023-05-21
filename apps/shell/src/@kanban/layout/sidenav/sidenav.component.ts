@@ -22,6 +22,10 @@ export class SidenavComponent {
   }
 
   createBoard() {
-    this.dialog.open(AddEditBoardComponent, { height: '70vh', width: '600px' });
+    this.dialog.open(AddEditBoardComponent, {
+      maxHeight: '70vh',
+      width: '600px',
+      data: { isEdit: false },
+    });
   }
 }

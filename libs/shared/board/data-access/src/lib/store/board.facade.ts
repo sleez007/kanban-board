@@ -5,7 +5,7 @@ import { boardActions } from './board.actions';
 import * as BoardActions from './board.actions';
 //import * as BoardFeature from './board.reducer';
 import * as BoardSelectors from './board.selectors';
-import { ITask } from '../model';
+import { IBoard, ITask } from '../model';
 
 @Injectable()
 export class BoardFacade {
@@ -38,8 +38,38 @@ export class BoardFacade {
     this.store.dispatch(boardActions.selectBoardById({ id }));
   }
 
+  addNewBoard(board: IBoard) {
+    this.store.dispatch(boardActions.createNewBoard({ data: board }));
+  }
+
+  editBoard(board: IBoard) {
+    this.store.dispatch(boardActions.editBoard({ data: board }));
+  }
+
+  deleteBoard() {
+    this.store.dispatch(boardActions.deleteBoard());
+  }
+
   addTask(task: ITask) {
     this.store.dispatch(boardActions.addNewTask({ task }));
+  }
+  editTask(columnIndex: number, taskIndex: number, task: ITask) {
+    this.store.dispatch(
+      boardActions.editTask({ columnIndex, taskIndex, task })
+    );
+  }
+
+  toggleSubtaskStatus(
+    subtaskIndex: number,
+    taskIndex: number,
+    columnIndex: number
+  ) {
+    this.store.dispatch(
+      boardActions.toggleSubTaskStatus({ subtaskIndex, taskIndex, columnIndex })
+    );
+  }
+  deleteTask(columnIndex: number, taskIndex: number) {
+    this.store.dispatch(boardActions.deleteTask({ columnIndex, taskIndex }));
   }
 
   dragTaskWithSameColumn(

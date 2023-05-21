@@ -21,6 +21,7 @@
         <h1 class="text-xl font-medium">{{ obs.title }}</h1>
         <div class="cta">
           <button
+            [disabled]="!obs.title"
             (click)="createNewTask()"
             class="btn"
             mat-flat-button
@@ -28,7 +29,12 @@
           >
             <mat-icon>add</mat-icon> Add New Task
           </button>
-          <button mat-icon-button aria-label="More options Button">
+          <button
+            [matMenuTriggerFor]="menu"
+            [disabled]="!obs.title"
+            mat-icon-button
+            aria-label="More options Button"
+          >
             <mat-icon>more_vert</mat-icon>
           </button>
         </div>
@@ -36,3 +42,8 @@
     </nav>
   </div>
 </div>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="deleteBoard()">Delete Board</button>
+  <button mat-menu-item (click)="editBoard()">Edit Board</button>
+</mat-menu>
