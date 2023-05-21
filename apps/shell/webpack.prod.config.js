@@ -10,7 +10,7 @@ module.exports = withModuleFederation({
    * e.g.
    * remotes: [
    *   ['app1', 'https://app1.example.com'],
-   *   ['app2', 'https://app2.example.com'],
+   *   ['app2', ' https://app2.example.com'],
    * ]
    */
 });
