@@ -6,6 +6,9 @@ import {
 } from '@kanbanboard/shared/board/data-access';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { LayoutModule } from '../../@kanban/layout/layout.module';
+import { SidenavModule } from '../../@kanban/layout/sidenav/sidenav.module';
+import { ToolbarModule } from '../../@kanban/layout/toolbar/toolbar.module';
 
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;
@@ -18,6 +21,9 @@ describe('MainLayoutComponent', () => {
         SharedBoardDataAccessModule,
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
+        SidenavModule,
+        ToolbarModule,
+        LayoutModule,
       ],
       declarations: [MainLayoutComponent],
     }).compileComponents();
@@ -43,4 +49,3 @@ describe('MainLayoutComponent', () => {
 });
 
 //https://semaphoreci.com/community/tutorials/testing-components-in-angular-2-with-jasmine
-// https://bagggary.github.io/kanban-task-management-web-app/

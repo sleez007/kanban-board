@@ -6,11 +6,11 @@ import { StoreModule, Store } from '@ngrx/store';
 import * as BoardActions from './board.actions';
 import { BoardEffects } from './board.effects';
 import { BoardFacade } from './board.facade';
-import { BoardEntity } from './board.models';
 import { BOARD_FEATURE_KEY, BoardState, boardReducer } from './board.reducer';
 import { firstValueFrom } from 'rxjs';
 import { BoardService } from '../services/board.service';
 import { HttpClientModule } from '@angular/common/http';
+import { IBoard } from '../model';
 
 interface TestSchema {
   board: BoardState;
@@ -19,9 +19,10 @@ interface TestSchema {
 describe('BoardFacade', () => {
   let facade: BoardFacade;
   let store: Store<TestSchema>;
-  const createBoardEntity = (id: string, name = ''): BoardEntity => ({
+  const createBoardEntity = (id: number, name = ''): IBoard => ({
     id,
-    name: name || `name-${id}`,
+    name,
+    columns: [],
   });
 
   describe('used in NgModule', () => {
@@ -66,7 +67,7 @@ describe('BoardFacade', () => {
       isLoaded = await firstValueFrom(facade.loaded$);
 
       expect(list.length).toBe(0);
-      expect(isLoaded).toBe(true);
+      expect(isLoaded).toBe(false);
     });
 
     /**
@@ -80,8 +81,11 @@ describe('BoardFacade', () => {
       expect(isLoaded).toBe(false);
 
       store.dispatch(
-        BoardActions.loadBoardSuccess({
-          board: [createBoardEntity('AAA'), createBoardEntity('BBB')],
+        BoardActions.boardApiActions.getInitialDataSuccess({
+          data: [
+            createBoardEntity(1, 'New board'),
+            createBoardEntity(2, 'jfjmbjbjk'),
+          ],
         })
       );
 

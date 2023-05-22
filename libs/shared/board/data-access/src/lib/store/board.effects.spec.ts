@@ -39,4 +39,15 @@ describe('BoardEffects', () => {
       expect(effects.init$).toBeObservable(expected);
     });
   });
+
+  // describe('getInitialData$', () => {
+  //   it('should retrive a list of boards', () => {
+  //     actions = hot('-a-|', {a: BoardActions.boardActions.getInitialData()})
+
+  //     const expected = hot('-a-|', {
+  //       a: BoardActions.boardApiActions.getInitialDataSuccess({data: []})
+  //     })
+
+  //     expect(effects.getInitialData$).toBeObservable(expected);
+  //   })
 });
