@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "build:prod": "nx run-many --parallel --target=build --all --maxParallel=100 --configuration=production",
+    "deploy:prod": "npm run build:prod &&  cp -r dist/apps/shell/* dist/apps && rm -r dist/apps/shell",
     "lint": "nx run-many --all --target=lint --max-warnings=0",
     "format": "nx format:write"
   },
